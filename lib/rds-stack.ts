@@ -1,4 +1,4 @@
-import { Stack, StackProps } from "aws-cdk-lib";
+import { Duration, Stack, StackProps } from "aws-cdk-lib";
 import {
   InstanceClass,
   InstanceSize,
@@ -38,6 +38,9 @@ export class RDSStack extends Stack {
       credentials: this.rdsSecret,
       databaseName: "hackmeet",
       instanceType: InstanceType.of(InstanceClass.T2, InstanceSize.MICRO),
+      allocatedStorage: 20,
+      autoMinorVersionUpgrade: false,
+      backupRetention: Duration.days(0),
       vpc,
       vpcSubnets: {
         subnetType: SubnetType.PRIVATE_ISOLATED,
